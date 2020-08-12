@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @author angelogl
@@ -29,4 +30,7 @@ public interface FilmeDAO extends JpaRepository<Filme, Long> {
     List<Filme> findByEstoqueGreaterThan(Integer estoque);
 
     boolean existsById(Filme filme);
+    
+    @Query("select c from Filme c where c.nome like %?1")
+    List<Filme> findByNameEndsWith(String nome);
 }
